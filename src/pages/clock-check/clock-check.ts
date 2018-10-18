@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfirmPage } from '../confirm/confirm';
 import { HomePage } from '../home/home';
 
+
 /**
  * Generated class for the ClockCheckPage page.
  *
@@ -21,6 +22,7 @@ export class ClockCheckPage {
   ngName : any = "";
   ngAction : any = "";
   ngDateTime : any = "";
+  ngCheck : any = "";
   userId : any = "";
   mNav : any;
 
@@ -33,7 +35,16 @@ export class ClockCheckPage {
     this.ngName = navParams.get('name');
     this.ngAction = navParams.get('last_action');
     this.ngDateTime = navParams.get('date_time');
+    
     this.userId = navParams.get('user_id');
+
+    if(this.ngAction === "Clocked Out"){
+
+      this.ngCheck = "Clock In";
+    }else{
+      this.ngCheck = "Clock Out";
+    }
+
   }
 
   ionViewDidLoad() {
@@ -60,6 +71,9 @@ export class ClockCheckPage {
       if(mId == tempList[index].user_id){
 
         if(mAction === "Clocked Out"){
+
+          console.log("wat");
+          
           newAction = "Clocked In";
           newDateTime = new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
 
@@ -91,16 +105,16 @@ export class ClockCheckPage {
     //this.navCtrl.get
 
     
-          this.navCtrl.push(ConfirmPage, {'name':this.ngName, 'last_action':newAction}).then(
-            response => {
-              console.log('Response ' + response);
-            },
-            error => {
-              console.log('Error: ' + error);
-            }
-          ).catch(exception => {
-            console.log('Exception ' + exception);
-          });
+    this.navCtrl.push(ConfirmPage, {'name':this.ngName, 'last_action':newAction}).then(
+      response => {
+        console.log('Response ' + response);
+      },
+      error => {
+        console.log('Error: ' + error);
+      }
+    ).catch(exception => {
+      console.log('Exception ' + exception);
+    });
 
 
  
@@ -117,6 +131,11 @@ export class ClockCheckPage {
         this.navCtrl.setRoot(HomePage);
     }, 30000);
   }
+
+
+  /// Functions and stuff for clock widget
+
+
 
 
 }

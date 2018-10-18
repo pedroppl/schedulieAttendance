@@ -8,7 +8,7 @@ webpackJsonp([2],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__confirm_confirm__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -35,6 +35,7 @@ var ClockCheckPage = /** @class */ (function () {
         this.ngName = "";
         this.ngAction = "";
         this.ngDateTime = "";
+        this.ngCheck = "";
         this.userId = "";
         this.mNav = navCtrl;
         console.log(navParams.get('name'));
@@ -42,6 +43,12 @@ var ClockCheckPage = /** @class */ (function () {
         this.ngAction = navParams.get('last_action');
         this.ngDateTime = navParams.get('date_time');
         this.userId = navParams.get('user_id');
+        if (this.ngAction === "Clocked Out") {
+            this.ngCheck = "Clock In";
+        }
+        else {
+            this.ngCheck = "Clock Out";
+        }
     }
     ClockCheckPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ClockCheckPage');
@@ -59,6 +66,7 @@ var ClockCheckPage = /** @class */ (function () {
         for (var index = 0; index < tempList.length; index++) {
             if (mId == tempList[index].user_id) {
                 if (mAction === "Clocked Out") {
+                    console.log("wat");
                     newAction = "Clocked In";
                     newDateTime = new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString();
                     //update the data in the tempList
@@ -99,7 +107,7 @@ var ClockCheckPage = /** @class */ (function () {
     };
     ClockCheckPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-clock-check',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/'<!--\n  Generated template for the ClockCheckPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar hideBackButton>\n    <ion-title>clockCheck</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  \n\n\n  <ion-card>\n\n    <ion-card-header text-center>\n      <h1>Welcome {{ngName}}</h1>\n      <h3>Your last action was -\' {{ngAction}} \' on {{ngDateTime}}</h3>\n    </ion-card-header>\n    \n  \n    <ion-card-content >\n\n        <div padding text-center>\n       >>>> CURRENT TIME DISPLAYED HERE <<<<<<\n        </div>\n      \n        <div padding text-center>\n          <button ion-button round large color="primary" (click)="update()">CHECK</button>\n        </div>\n    </ion-card-content>\n  \n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/,
+            selector: 'page-clock-check',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/'<!--\n  Generated template for the ClockCheckPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar hideBackButton>\n    <ion-title>clockCheck</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  \n\n\n  <ion-card>\n\n    <ion-card-header text-center>\n      <h1>Welcome {{ngName}}</h1>\n      <h3>Your last action was -\' {{ngAction}} \' on {{ngDateTime}}</h3>\n    </ion-card-header>\n    \n  \n    <ion-card-content >\n\n        <div padding text-center>\n           >>>>>>>>>>>>>>>> FANCY CLOCK HERE <<<<<<<<<<<<<<<<<<<<\n         </div>\n      \n        <div padding text-center>\n          <button ion-button round large color="primary" (click)="update()">{{ngCheck}}</button>\n        </div>\n    </ion-card-content>\n  \n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
     ], ClockCheckPage);
@@ -118,7 +126,7 @@ var ClockCheckPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConfirmPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -165,10 +173,9 @@ var ConfirmPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-confirm',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/confirm/confirm.html"*/'<!--\n  Generated template for the ConfirmPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar hideBackButton>\n    <ion-title>confirm</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-card>\n\n        <ion-card-header text-center>\n          <h1>Thank you {{ngName}}</h1>\n         \n        </ion-card-header>\n        \n      \n        <ion-card-content >\n    \n            <div padding text-center>\n              You {{ngLastAction}} at {{ngDateTime}}\n            </div>\n          \n            \n        </ion-card-content>\n      \n      </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/confirm/confirm.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], ConfirmPage);
     return ConfirmPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=confirm.js.map
@@ -231,6 +238,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
+var userList = new Array;
+var user1 = {
+    'user_id': 'abc1',
+    'name': 'John Woodlock',
+    'last_action': 'Clocked In',
+    'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
+};
+var user2 = {
+    'user_id': '1234',
+    'name': 'Anna Roxane',
+    'last_action': 'Clocked Out',
+    'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
+};
+var user3 = {
+    'user_id': '3344',
+    'name': 'Emily Timto',
+    'last_action': 'null',
+    'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
+};
+userList[0] = user1;
+userList[1] = user2;
+userList[2] = user3;
+localStorage.setItem('User_List', JSON.stringify(userList));
 //# sourceMappingURL=main.js.map
 
 /***/ }),
@@ -246,7 +276,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_clock_check_clock_check__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_confirm_confirm__ = __webpack_require__(101);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -314,7 +344,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -351,7 +381,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 77:
+/***/ 46:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -380,28 +410,6 @@ var HomePage = /** @class */ (function () {
         this.mNav = navCtrl;
         this.mNavParams = nParams;
         this.ngIdEmployee = "";
-        var user1 = {
-            'user_id': 'abc1',
-            'name': 'John Woodlock',
-            'last_action': 'Clocked In',
-            'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
-        };
-        var user2 = {
-            'user_id': '1234',
-            'name': 'Anna Roxane',
-            'last_action': 'Clocked Out',
-            'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
-        };
-        var user3 = {
-            'user_id': '3344',
-            'name': 'Emily Timto',
-            'last_action': 'null',
-            'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
-        };
-        this.userList[0] = user1;
-        this.userList[1] = user2;
-        this.userList[2] = user3;
-        localStorage.setItem('User_List', JSON.stringify(this.userList));
         console.log(localStorage.getItem('User_List'));
         //Create and reset all the data and vars needed calling a method to do so.
         //After the sign in, collect all the data from the user and push to the next page
@@ -441,9 +449,10 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Demo Company</ion-title>\n    <ion-buttons end>\n      <button ion-button round outline color="danger">Help Me</button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n\n    <ion-card>\n\n        <ion-card-header text-center>\n          <h1>Employee Attendance</h1>\n        </ion-card-header>\n        \n      \n        <ion-card-content >\n            <ion-list>\n              <ion-item>\n                  <ion-input [(ngModel)]="ngIdEmployee" text-center type="text" placeholder="Employee PIN"></ion-input>\n              </ion-item>\n            \n            </ion-list>\n          \n            <div padding text-center>\n              <button ion-button round large color="primary" (click)="connect()">CHECK IN/OUT</button>\n            </div>\n        </ion-card-content>\n      \n      </ion-card>\n\n \n\n    \n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
