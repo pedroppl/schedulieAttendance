@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Demo Company</ion-title>
+    <ion-buttons end>
+      <button ion-button round outline color="danger">Help Me</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+    <ion-card>
+
+        <ion-card-header text-center>
+          <h1>Employee Attendance</h1>
+        </ion-card-header>
+        
+      
+        <ion-card-content >
+            <ion-list>
+              <ion-item>
+                  <ion-input [(ngModel)]="ngIdEmployee" text-center type="text" placeholder="Employee PIN"></ion-input>
+              </ion-item>
+            
+            </ion-list>
+          
+            <div padding text-center>
+              <button ion-button round large color="primary" (click)="connect()">CHECK IN/OUT</button>
+            </div>
+        </ion-card-content>
+      
+      </ion-card>
+
+ 
+
+    
+
+</ion-content>
