@@ -48,9 +48,12 @@ export class ConfirmPage {
   //5 seconds after the page is loaded, change the root to the HomePage
   ngOnInit(){
     setTimeout(() => {
-        // this.navCtrl.popToRoot();
-        // might try this instead
-        this.navCtrl.setRoot(HomePage);
+
+
+      this.navCtrl.popToRoot();
+      
+
+
     }, 5500);
   }
 

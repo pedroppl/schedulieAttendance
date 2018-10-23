@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfirmPage } from '../confirm/confirm';
 import { HomePage } from '../home/home';
-
 
 /**
  * Generated class for the ClockCheckPage page.
@@ -12,12 +11,13 @@ import { HomePage } from '../home/home';
  */
 
 @IonicPage()
+
 @Component({
   selector: 'page-clock-check',
   templateUrl: 'clock-check.html',
 })
 export class ClockCheckPage {
-  
+ 
 
   ngName : any = "";
   ngAction : any = "";
@@ -25,8 +25,9 @@ export class ClockCheckPage {
   ngCheck : any = "";
   userId : any = "";
   mNav : any;
+  mTimer : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public elementRef: ElementRef) {
 
     this.mNav = navCtrl;
 
@@ -45,10 +46,44 @@ export class ClockCheckPage {
       this.ngCheck = "Clock Out";
     }
 
+    
+
+    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClockCheckPage');
+
+    console.log("page stack count: " + this.navCtrl.length());
+   
+    
+     this.mTimer = setTimeout(() => {
+
+        if( this.navCtrl.length() > 1){
+          if(this.navCtrl.length() > 2){
+            this.navCtrl.remove(2);
+            this.navCtrl.remove(3);
+            
+          }else{
+           
+            this.navCtrl.remove(1, 1);
+
+            console.log("page stack count: " + this.navCtrl.length());
+       
+            console.log("removed in clockCleck");
+            
+          }
+          
+        }
+
+        // this.navCtrl.popToRoot();
+        // might try this instead
+        //this.navCtrl.setRoot(HomePage);
+       // this.navCtrl.popToRoot();
+       }, 10000);
+  
+
   }
 
 
@@ -72,7 +107,7 @@ export class ClockCheckPage {
 
         if(mAction === "Clocked Out"){
 
-          console.log("wat");
+          
           
           newAction = "Clocked In";
           newDateTime = new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
@@ -108,6 +143,7 @@ export class ClockCheckPage {
     this.navCtrl.push(ConfirmPage, {'name':this.ngName, 'last_action':newAction}).then(
       response => {
         console.log('Response ' + response);
+        clearTimeout(this.mTimer);
       },
       error => {
         console.log('Error: ' + error);
@@ -123,19 +159,18 @@ export class ClockCheckPage {
 
 
 
-   //5 seconds after the page is loaded, change the root to the HomePage
+   //30 seconds after the page is loaded, change the root to the HomePage
    ngOnInit(){
-    setTimeout(() => {
-        // this.navCtrl.popToRoot();
-        // might try this instead
-        this.navCtrl.setRoot(HomePage);
-    }, 30000);
+   
+
+    ($(".clock") as any).FlipClock({
+      
+      clockFace: 'TwentyFourHourClock'
+    }
+  );
+
+  
+   
   }
-
-
-  /// Functions and stuff for clock widget
-
-
-
 
 }

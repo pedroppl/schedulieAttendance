@@ -17,6 +17,8 @@
 
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
 
   <!-- un-comment this code to enable service worker
   <script>
@@ -29,9 +31,14 @@
 
   <link href="build/main.css" rel="stylesheet">
 
+
+  <link rel="stylesheet" href="flipclock.css">
+
 </head>
 <body>
-
+   
+   
+    
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
 
@@ -44,6 +51,18 @@
 
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
+
+  
+  <script src="flipclock.min.js"></script>
+
+  <script>
+      console.log("aaaa");
+     $("clock").FlipClock({
+        
+        clockFace: 'TwentyFourHourClock'
+        }
+    );
+  </script>
 
 </body>
 </html>

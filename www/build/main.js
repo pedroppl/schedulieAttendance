@@ -8,7 +8,6 @@ webpackJsonp([2],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__confirm_confirm__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21,7 +20,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
  * Generated class for the ClockCheckPage page.
  *
@@ -29,9 +27,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var ClockCheckPage = /** @class */ (function () {
-    function ClockCheckPage(navCtrl, navParams) {
+    function ClockCheckPage(navCtrl, navParams, elementRef) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.elementRef = elementRef;
         this.ngName = "";
         this.ngAction = "";
         this.ngDateTime = "";
@@ -51,9 +50,29 @@ var ClockCheckPage = /** @class */ (function () {
         }
     }
     ClockCheckPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
         console.log('ionViewDidLoad ClockCheckPage');
+        console.log("page stack count: " + this.navCtrl.length());
+        this.mTimer = setTimeout(function () {
+            if (_this.navCtrl.length() > 1) {
+                if (_this.navCtrl.length() > 2) {
+                    _this.navCtrl.remove(2);
+                    _this.navCtrl.remove(3);
+                }
+                else {
+                    _this.navCtrl.remove(1, 1);
+                    console.log("page stack count: " + _this.navCtrl.length());
+                    console.log("removed in clockCleck");
+                }
+            }
+            // this.navCtrl.popToRoot();
+            // might try this instead
+            //this.navCtrl.setRoot(HomePage);
+            // this.navCtrl.popToRoot();
+        }, 10000);
     };
     ClockCheckPage.prototype.update = function () {
+        var _this = this;
         var mAction = this.ngAction;
         //let mDateTime = this.ngDateTime;
         var mId = this.userId;
@@ -66,7 +85,6 @@ var ClockCheckPage = /** @class */ (function () {
         for (var index = 0; index < tempList.length; index++) {
             if (mId == tempList[index].user_id) {
                 if (mAction === "Clocked Out") {
-                    console.log("wat");
                     newAction = "Clocked In";
                     newDateTime = new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString();
                     //update the data in the tempList
@@ -90,29 +108,27 @@ var ClockCheckPage = /** @class */ (function () {
         //this.navCtrl.get
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__confirm_confirm__["a" /* ConfirmPage */], { 'name': this.ngName, 'last_action': newAction }).then(function (response) {
             console.log('Response ' + response);
+            clearTimeout(_this.mTimer);
         }, function (error) {
             console.log('Error: ' + error);
         }).catch(function (exception) {
             console.log('Exception ' + exception);
         });
     };
-    //5 seconds after the page is loaded, change the root to the HomePage
+    //30 seconds after the page is loaded, change the root to the HomePage
     ClockCheckPage.prototype.ngOnInit = function () {
-        var _this = this;
-        setTimeout(function () {
-            // this.navCtrl.popToRoot();
-            // might try this instead
-            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
-        }, 30000);
+        $(".clock").FlipClock({
+            clockFace: 'TwentyFourHourClock'
+        });
     };
     ClockCheckPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-clock-check',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/'<!--\n  Generated template for the ClockCheckPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar hideBackButton>\n    <ion-title>clockCheck</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  \n\n\n  <ion-card>\n\n    <ion-card-header text-center>\n      <h1>Welcome {{ngName}}</h1>\n      <h3>Your last action was -\' {{ngAction}} \' on {{ngDateTime}}</h3>\n    </ion-card-header>\n    \n  \n    <ion-card-content >\n\n        <div padding text-center>\n           >>>>>>>>>>>>>>>> FANCY CLOCK HERE <<<<<<<<<<<<<<<<<<<<\n         </div>\n      \n        <div padding text-center>\n          <button ion-button round large color="primary" (click)="update()">{{ngCheck}}</button>\n        </div>\n    </ion-card-content>\n  \n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/,
+            selector: 'page-clock-check',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/'<!--\n  Generated template for the ClockCheckPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n\n  <ion-navbar hideBackButton>\n    <ion-title>clockCheck</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n\n\n  <ion-card>\n\n    <ion-card-header text-center >\n      <h1>Welcome {{ngName}}</h1>\n      <h3>Your last action was -\' {{ngAction}} \' on {{ngDateTime}}</h3>\n    </ion-card-header>\n  \n\n    <ion-card-content >\n\n      <div style="display: flex;\n      flex-direction: row;\n      align-items: center;\n      justify-content: center;" class="clock" ></div>\n\n     \n\n        <div padding text-center>\n          <button ion-button round large color="primary" (click)="update()">{{ngCheck}}</button>\n        </div>\n    </ion-card-content>\n  \n  </ion-card>\n\n \n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/clock-check/clock-check.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _c || Object])
     ], ClockCheckPage);
     return ClockCheckPage;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=clock-check.js.map
@@ -126,7 +142,6 @@ var ClockCheckPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConfirmPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -136,7 +151,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 /**
@@ -164,18 +178,17 @@ var ConfirmPage = /** @class */ (function () {
     ConfirmPage.prototype.ngOnInit = function () {
         var _this = this;
         setTimeout(function () {
-            // this.navCtrl.popToRoot();
-            // might try this instead
-            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
+            _this.navCtrl.popToRoot();
         }, 5500);
     };
     ConfirmPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-confirm',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/confirm/confirm.html"*/'<!--\n  Generated template for the ConfirmPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar hideBackButton>\n    <ion-title>confirm</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-card>\n\n        <ion-card-header text-center>\n          <h1>Thank you {{ngName}}</h1>\n         \n        </ion-card-header>\n        \n      \n        <ion-card-content >\n    \n            <div padding text-center>\n              You {{ngLastAction}} at {{ngDateTime}}\n            </div>\n          \n            \n        </ion-card-content>\n      \n      </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/confirm/confirm.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
     ], ConfirmPage);
     return ConfirmPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=confirm.js.map
@@ -249,7 +262,7 @@ var user2 = {
     'user_id': '1234',
     'name': 'Anna Roxane',
     'last_action': 'Clocked Out',
-    'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
+    'date_time': "8.37" + " " + new Date().toDateString()
 };
 var user3 = {
     'user_id': '3344',
@@ -276,7 +289,7 @@ localStorage.setItem('User_List', JSON.stringify(userList));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_clock_check_clock_check__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_confirm_confirm__ = __webpack_require__(101);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -344,7 +357,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(77);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -381,7 +394,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 46:
+/***/ 77:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -420,6 +433,8 @@ var HomePage = /** @class */ (function () {
     }
     HomePage.prototype.ionViewDidEnter = function () {
         //  this.ngIdEmployee = "";
+        //Checking if there is more than one page in the page stack, if so, ask if there are more than 2 pages. If so, delete the stacked pages.
+        //We do this to prevent the timers to keep going even when the page is not visible.
     };
     HomePage.prototype.connect = function () {
         var id = this.ngIdEmployee;
@@ -449,10 +464,9 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Demo Company</ion-title>\n    <ion-buttons end>\n      <button ion-button round outline color="danger">Help Me</button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n\n    <ion-card>\n\n        <ion-card-header text-center>\n          <h1>Employee Attendance</h1>\n        </ion-card-header>\n        \n      \n        <ion-card-content >\n            <ion-list>\n              <ion-item>\n                  <ion-input [(ngModel)]="ngIdEmployee" text-center type="text" placeholder="Employee PIN"></ion-input>\n              </ion-item>\n            \n            </ion-list>\n          \n            <div padding text-center>\n              <button ion-button round large color="primary" (click)="connect()">CHECK IN/OUT</button>\n            </div>\n        </ion-card-content>\n      \n      </ion-card>\n\n \n\n    \n\n</ion-content>\n'/*ion-inline-end:"/Users/pablo/Documentos/Work/SchedulieAttendance/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], HomePage);
     return HomePage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map

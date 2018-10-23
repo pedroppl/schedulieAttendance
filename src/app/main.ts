@@ -19,7 +19,7 @@ let user1 = {
     'user_id': '1234',
     'name': 'Anna Roxane',
     'last_action': 'Clocked Out',
-    'date_time': new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
+    'date_time': "8.37" + " " + new Date().toDateString()
   };
   let user3 = {
 

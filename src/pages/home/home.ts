@@ -39,6 +39,12 @@ export class HomePage {
 
   ionViewDidEnter() {
   //  this.ngIdEmployee = "";
+
+    
+
+    //Checking if there is more than one page in the page stack, if so, ask if there are more than 2 pages. If so, delete the stacked pages.
+    //We do this to prevent the timers to keep going even when the page is not visible.
+   
     
   }
 
