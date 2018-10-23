@@ -126,7 +126,7 @@
   top: 0; }
 
 .flip-clock-wrapper ul li a div.up:after {
-  content: "";
+  content: "AAAAAA";
   position: absolute;
   top: 44px;
   left: 0;

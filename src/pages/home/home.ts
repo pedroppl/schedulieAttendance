@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { NavParams} from 'ionic-angular';
 import { ClockCheckPage } from '../clock-check/clock-check';
 
@@ -15,7 +15,10 @@ export class HomePage {
 
   userList = new Array;
 
-  constructor(public navCtrl: NavController, public nParams: NavParams) {
+  mConnected : boolean;
+
+
+  constructor(public navCtrl: NavController, public nParams: NavParams, public toastCtrl: ToastController) {
 
     this.mNav = navCtrl;
     this.mNavParams = nParams;
@@ -40,11 +43,9 @@ export class HomePage {
   ionViewDidEnter() {
   //  this.ngIdEmployee = "";
 
-    
+    this.mConnected = false;
 
-    //Checking if there is more than one page in the page stack, if so, ask if there are more than 2 pages. If so, delete the stacked pages.
-    //We do this to prevent the timers to keep going even when the page is not visible.
-   
+    
     
   }
 
@@ -59,8 +60,11 @@ export class HomePage {
 
 
     for (let index = 0; index < tempList.length; index++) {
+
       
       if(id == tempList[index].user_id){
+
+        this.mConnected = true;
 
         this.mNav.push(ClockCheckPage, {'user_id':id, 'name':tempList[index].name, 'last_action':tempList[index].last_action, 'date_time':tempList[index].date_time}).then(
           response => {
@@ -76,14 +80,23 @@ export class HomePage {
 
         this.ngIdEmployee = "";
         break;
+      }else{
+        this.mConnected = false;
       }
     }
 
-    /* this.mNav.push(ClockCheckPage, {'id':"this is not good at all"});
+    if(this.mConnected != true){
+      let toast = this.toastCtrl.create({
+        message: 'Incorrect Employee PIN, Please try again.',
+        duration: 3000,
+        position: "top"
+      });
+      toast.present();
 
+      this.ngIdEmployee = "";
+    }
 
-       this.ngIdEmployee = ""; 
-    */
+   
 
     //do whatever with the data in the input
 

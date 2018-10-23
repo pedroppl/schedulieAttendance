@@ -55,6 +55,10 @@ export class ClockCheckPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClockCheckPage');
 
+
+    //Checking if there is more than one page in the page stack, if so, ask if there are more than 2 pages. If so, delete the stacked pages.
+    //We do this to prevent the timers to keep going even when the page is not visible.
+   
     console.log("page stack count: " + this.navCtrl.length());
    
     
@@ -81,7 +85,7 @@ export class ClockCheckPage {
         // might try this instead
         //this.navCtrl.setRoot(HomePage);
        // this.navCtrl.popToRoot();
-       }, 10000);
+       }, 30000);
   
 
   }
