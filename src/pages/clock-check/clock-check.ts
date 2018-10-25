@@ -1,7 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfirmPage } from '../confirm/confirm';
-import { HomePage } from '../home/home';
+
 
 /**
  * Generated class for the ClockCheckPage page.
@@ -72,19 +72,9 @@ export class ClockCheckPage {
           }else{
            
             this.navCtrl.remove(1, 1);
-
-            console.log("page stack count: " + this.navCtrl.length());
-       
-            console.log("removed in clockCleck");
-            
           }
           
         }
-
-        // this.navCtrl.popToRoot();
-        // might try this instead
-        //this.navCtrl.setRoot(HomePage);
-       // this.navCtrl.popToRoot();
        }, 30000);
   
 
@@ -111,8 +101,6 @@ export class ClockCheckPage {
 
         if(mAction === "Clocked Out"){
 
-          
-          
           newAction = "Clocked In";
           newDateTime = new Date().getHours() + "." + new Date().getMinutes() + " " + new Date().toDateString()
 
@@ -146,14 +134,14 @@ export class ClockCheckPage {
     
     this.navCtrl.push(ConfirmPage, {'name':this.ngName, 'last_action':newAction}).then(
       response => {
-        console.log('Response ' + response);
+        
         clearTimeout(this.mTimer);
       },
       error => {
-        console.log('Error: ' + error);
+       
       }
     ).catch(exception => {
-      console.log('Exception ' + exception);
+     
     });
 
 

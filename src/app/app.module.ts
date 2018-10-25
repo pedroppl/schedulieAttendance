@@ -8,13 +8,17 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ClockCheckPage } from '../pages/clock-check/clock-check';
 import { ConfirmPage } from '../pages/confirm/confirm';
+import { HomeManagerPage } from '../pages/home-manager/home-manager';
+import { LoginManagerPage } from '../pages/login-manager/login-manager';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ClockCheckPage,
-    ConfirmPage
+    ConfirmPage,
+    HomeManagerPage,
+    LoginManagerPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ import { ConfirmPage } from '../pages/confirm/confirm';
     MyApp,
     HomePage,
     ClockCheckPage,
-    ConfirmPage
+    ConfirmPage,
+    HomeManagerPage,
+    LoginManagerPage
   ],
   providers: [
     StatusBar,

@@ -22,8 +22,8 @@
   <ion-card>
 
     <ion-card-header text-center >
-      <h1>Welcome {{ngName}}</h1>
-      <h3>Your last action was -' {{ngAction}} ' on {{ngDateTime}}</h3>
+      <ion-label style="font-size: 5rem">Welcome {{ngName}}</ion-label>
+      <ion-label style="font-size: 3rem">Your last action was -' {{ngAction}} ' on {{ngDateTime}}</ion-label>
     </ion-card-header>
   
 
@@ -37,7 +37,7 @@
      
 
         <div padding text-center>
-          <button ion-button round large color="primary" (click)="update()">{{ngCheck}}</button>
+          <button  ion-button round large color="primary" style="height:10rem; width: 50rem;" (click)="update()">{{ngCheck}}</button>
         </div>
     </ion-card-content>
   

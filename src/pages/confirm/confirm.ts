@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+
 
 
 /**
@@ -30,18 +30,11 @@ export class ConfirmPage {
     this.ngLastAction = this.navParams.get('last_action');
     this.ngDateTime = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
 
-   
-    
-    
+
   }
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad ConfirmPage');
-    
-   
-    
-
-
   }
 
 
@@ -49,10 +42,7 @@ export class ConfirmPage {
   ngOnInit(){
     setTimeout(() => {
 
-
-      this.navCtrl.popToRoot();
-      
-
+      this.navCtrl.popToRoot(); 
 
     }, 5500);
   }
