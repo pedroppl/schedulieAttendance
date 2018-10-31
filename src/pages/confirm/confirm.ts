@@ -30,13 +30,11 @@ export class ConfirmPage {
     this.ngLastAction = this.navParams.get('last_action');
     this.ngDateTime = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
 
-
   }
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad ConfirmPage');
   }
-
 
   //5 seconds after the page is loaded, change the root to the HomePage
   ngOnInit(){

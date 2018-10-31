@@ -28,13 +28,13 @@
         align-items: center;
         justify-content:space-evenly;">
           <ion-item >
-            <ion-label text-center floating>Username</ion-label>
-            <ion-input style="border: 1px solid grey; border-radius: 15px; font-size: 2.5rem;" text-center type="email" value=""></ion-input>
+            <ion-label text-center floating>Email</ion-label>
+            <ion-input [(ngModel)]="ngManagerEmail" style="border: 1px solid grey; border-radius: 15px; font-size: 2.5rem;" text-center type="email" value="manager@schedulie.com"></ion-input>
           </ion-item>
         
           <ion-item>
               <ion-label text-center floating>Password</ion-label>
-              <ion-input style="border: 1px solid grey; border-radius: 15px; font-size: 2.5rem;"  text-center type="password" value=""></ion-input>
+              <ion-input [(ngModel)]="ngManagerPassword" style="border: 1px solid grey; border-radius: 15px; font-size: 2.5rem;"  text-center type="password" value="manager"></ion-input>
           </ion-item>
 
          

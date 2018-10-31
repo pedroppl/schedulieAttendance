@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { NavParams} from 'ionic-angular';
 import { ClockCheckPage } from '../clock-check/clock-check';
 import { LoginManagerPage } from '../login-manager/login-manager';
+import { ClockInOutServiceProvider } from '../../providers/clock-in-out-service/clock-in-out-service';
 
 @Component({
   selector: 'page-home',
@@ -18,92 +19,190 @@ export class HomePage {
 
   mConnected : boolean;
 
+  mInputLenght : any = 0;
 
-  //TODO CREATE A LOGIN PAGE TO ALLOW A MANAGER TO LOG IN WITH EMAIL/USER AND PASSWORD.
-  //CREATE A HOME PAGE TO ADD OPTIONS FOR THE MANAGER, ONE OF THE OPTIONS MUST BE THE CLOCK IN/OUT
-  
-  // change to pop to the employee home page 
-  // Maybe changing the root at all?
-  // There should be a special code to allow a manager to go back to the main manager page.
+  action:any;
+  action_ts:any;
+  name:any;
+  loading : any;
+  staffID :any;
 
+  constructor(public navCtrl: NavController,
+     public nParams: NavParams, 
+     public toastCtrl: ToastController, 
+     public alertCtrl: AlertController,
+     public mStaffInfo: ClockInOutServiceProvider,
+     public loadingCtrl: LoadingController) {
 
+      this.mNav = navCtrl;
+      this.mNavParams = nParams;
+      this.ngIdEmployee = "";
 
-  constructor(public navCtrl: NavController, public nParams: NavParams, public toastCtrl: ToastController) {
-
-    this.mNav = navCtrl;
-    this.mNavParams = nParams;
-    this.ngIdEmployee = "";
-
-    
-    console.log(localStorage.getItem('User_List'));
-
-    
-    //After the sign in, collect all the data from the user and push to the next page
-      //Show the info collected and show the current time.
-      //When check-in/check-out update the data and push to the next page
-        //Show the updated info.
-        //After 5 seconds, change the ROOT path of the App to home.
-
-    
   }
 
   ionViewDidEnter() {
 
     this.mConnected = false;
 
+    this.setLoadingWindow();
+
+  }
+
+  setLoadingWindow(){
+    //lets prepare a loading popup.
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+  }
+
+
+  numberPad(numberInput:any){
+
+    if(numberInput == "back"){
+      if(this.ngIdEmployee.length > 0){
+        this.ngIdEmployee = this.ngIdEmployee.slice(0, this.ngIdEmployee.length -1)
+        this.mInputLenght--;
+      }
+    }else{
+      if(this.mInputLenght <=4){
+        this.ngIdEmployee += numberInput;
+        this.mInputLenght++;
+      }
+  
+      if(this.mInputLenght >= 4){
+        this.connect();
+
+      }
+    }
+
+  }
+
+  responseOk(data:any){
+
+   // console.log(data);
+
+    //Connection was succesful! if there is no data, show error. If so, lets do the next connection.
+    if(data === null){
+
+      if(this.mConnected != true){
+        let toast = this.toastCtrl.create({
+          message: 'Incorrect Employee PIN, Please try again.',
+          duration: 3000,
+          position: "top"
+        });
+        toast.present();
+        this.loading.dismiss();
+        this.setLoadingWindow();
+  
+        this.ngIdEmployee = "";
+        this.mInputLenght = 0;
+      }
+  
+
+    }else{
+      this.mConnected = true;
+
+      this.name = data.name;
+      //We have the name of the user, lets check his clock data.
+
+      this.staffID = data.id;
+
+      this.mStaffInfo.getStaffClockInfo(data.id, localStorage.getItem('token')).subscribe(this.responseClockOk.bind(this), this.responseFail.bind(this) );
+
+    }
+
+  }
+
+
+  responseClockOk(data:any){
+
+    //console.log(data);
+    
+    this.action = data.action;
+    this.action_ts = data.action_ts;
+
+    this.loading.dismiss();
+
+    this.mNav.push(ClockCheckPage, {
+       'user_id':this.staffID, 
+       'name':this.name,
+       'last_action':this.action, 
+       'date_time':this.action_ts
+     });
+ 
+ 
+     this.ngIdEmployee = "";
+     this.mInputLenght = 0;
+
+  }
+
+  responseFail(data:any){
+
+    console.log(data);
+    let toast = this.toastCtrl.create({
+      message: 'Cant connect with the server',
+      duration: 3000,
+      position: "top"
+    });
+    toast.present();
+    this.ngIdEmployee = "";
+
   }
 
 
   connect(){
 
+    this.loading.present();
+   
+    
+  
+    //If we dont get a response in 10 seconds, lets close the loading window and tell the user about it.
+    setTimeout(() => {
+      this.loading.dismiss();
+      
+    }, 10000);
+
+   // console.log(localStorage.getItem('token'));
+
+  
+    let pin = this.ngIdEmployee;
+
+    this.mStaffInfo.getStaffInfo(pin, localStorage.getItem('token')).subscribe(this.responseOk.bind(this), this.responseFail.bind(this) );
+
+    
+  }
 
 
-    //temporary workaround to get user info and "connect" the user to the app.
-    let id = this.ngIdEmployee;
+  showPrompt() {
+    const prompt = this.alertCtrl.create({
+      title: 'Manager Options',
+      message: "Enter a valid code",
+      inputs: [
+        {
+          name: 'Code',
+          placeholder: 'Code'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: data => {
 
-    let tempList = new Array();
-
-    tempList = JSON.parse(localStorage.getItem('User_List'));
-
-    if(id == "exit"){
-      this.navCtrl.setRoot(LoginManagerPage);
-      return;
-    }
-
-
-    for (let index = 0; index < tempList.length; index++) {
-
-      if(id == tempList[index].user_id){
-
-        this.mConnected = true;
-
-        this.mNav.push(ClockCheckPage, {
-          'user_id':id, 
-          'name':tempList[index].name,
-          'last_action':tempList[index].last_action, 
-          'date_time':tempList[index].date_time
-        });
-
-
-        this.ngIdEmployee = "";
-        break;
-      }else{
-        this.mConnected = false;
-      }
-    }
-
-    //Shows a Toast if the connection PIN was wrong.
-    if(this.mConnected != true){
-      let toast = this.toastCtrl.create({
-        message: 'Incorrect Employee PIN, Please try again.',
-        duration: 3000,
-        position: "top"
-      });
-      toast.present();
-
-      this.ngIdEmployee = "";
-    }
-
+            console.log(data);
+            if(data['Code'] === "exit"){
+              this.navCtrl.setRoot(LoginManagerPage);
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
 

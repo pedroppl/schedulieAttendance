@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomeManagerPage } from '../home-manager/home-manager';
+import { LoginManagerProvider } from '../../providers/login-manager/login-manager';
 
 /**
  * Generated class for the LoginManagerPage page.
@@ -16,7 +17,14 @@ import { HomeManagerPage } from '../home-manager/home-manager';
 })
 export class LoginManagerPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  ngManagerEmail:any;
+  ngManagerPassword:any;
+
+  mLogin : LoginManagerProvider;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,  login: LoginManagerProvider) {
+
+    this.mLogin = login;
   }
 
   ionViewDidLoad() {
@@ -26,7 +34,25 @@ export class LoginManagerPage {
 
   connect(){
 
+    this.mLogin.getLoginToken(this.ngManagerEmail, this.ngManagerPassword).subscribe(this.loginOk.bind(this), this.loginFail.bind(this) );
+
     this.navCtrl.push(HomeManagerPage);
+  }
+
+
+  loginOk(data:any){
+
+    console.log(data['authResponse']);
+
+
+    localStorage.setItem('token', data['authResponse'].token);
+    localStorage.setItem('role_id', data['authResponse'].role_id);
+
+  }
+
+
+  loginFail(){
+
   }
 
 }
