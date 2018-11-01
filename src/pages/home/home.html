@@ -9,15 +9,12 @@
 
 <ion-content >
 
-
-
     <ion-card >
 
         <ion-card-header text-center>
           <h1>Employee Attendance</h1>
         </ion-card-header>
         
-      
         <ion-card-content >
             <ion-list>
               <ion-item style="font-size: 30px;"> 
@@ -27,47 +24,36 @@
             </ion-list>
           
             <div padding text-center >
-                <ion-grid   >
-                    <ion-row text-center style="justify-content: center;">
-                        
-                      <ion-col col-2 text-center > <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('1')">1</button></ion-col>
-                      <ion-col text-center col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('2')">2</button></ion-col>
-                      <ion-col text-center col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('3')">3</button></ion-col>
-                      
-                     
-                    </ion-row>
-                    
-                    <ion-row style="justify-content: center;">
-                        <ion-col col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('4')">4</button></ion-col>
-                        <ion-col col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('5')">5</button></ion-col>
-                        <ion-col col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('6')">6</button></ion-col>
-          
-                    </ion-row>
-          
-                    <ion-row style="justify-content: center;">
-                        <ion-col col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('7')">7</button></ion-col>
-                        <ion-col col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('8')">8</button></ion-col>
-                        <ion-col col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('9')">9</button></ion-col>
-          
-                    </ion-row>
-          
-                    <ion-row style="justify-content: center;">
-                        <ion-col col-2 ><button ion-button round style="font-size: 2.4rem;"  color="primary" (click)="showPrompt()"><ion-icon name="key"></ion-icon></button></ion-col>
-                        <ion-col col-2> <button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('0')">0</button></ion-col>
-                        <ion-col col-2><button ion-button round style="font-size: 2.5rem;"  color="primary" (click)="numberPad('back')"><ion-icon name="arrow-round-back"></ion-icon></button></ion-col>
-          
-                    </ion-row>
-                  </ion-grid>
-          
+              <ion-grid   >
+                <ion-row style="justify-content: center;">
+                  <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('1')">1</button></ion-col>
+                  <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('2')">2</button></ion-col>
+                  <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('3')">3</button></ion-col>
+                  
+                </ion-row>
+                
+                <ion-row style="justify-content: center;">
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('4')">4</button></ion-col>
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('5')">5</button></ion-col>
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('6')">6</button></ion-col>
+      
+                </ion-row>
+      
+                <ion-row style="justify-content: center;">
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('7')">7</button></ion-col>
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('8')">8</button></ion-col>
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('9')">9</button></ion-col>
+      
+                </ion-row>
+      
+                <ion-row style="justify-content: center;">
+                    <ion-col col-2 ><button ion-button round style="height:8rem; width:8rem; font-size: 2.4rem; border-radius: 10%;"  color="primary" (click)="showPrompt()"><ion-icon name="key"></ion-icon></button></ion-col>
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('0')">0</button></ion-col>
+                    <ion-col col-2> <button ion-button round style="height:8rem; width:8rem; font-size: 2.5rem; border-radius: 10%;"  color="primary" (click)="numberPad('back')"><ion-icon name="arrow-round-back"></ion-icon></button></ion-col>
+
+                </ion-row>
+              </ion-grid>
             </div>
         </ion-card-content>
-      
       </ion-card>
-
-
-      
- 
-
-    
-
 </ion-content>
