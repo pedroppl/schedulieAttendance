@@ -11,13 +11,13 @@ import {Observable} from 'rxjs/Observable';
 export class LoginManagerProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello LoginManagerProvider Provider');
+    
   }
 
 
 
   public getLoginToken(email: string, password:string /* there are other optionals params that MUST be included */): Observable<any> {
-    let url = "https://app.schedulie.com/api/2018/authenticate";
+    let url = "removed_url";
 
     let postParams = {email:'', password:''}
     postParams.email=email;

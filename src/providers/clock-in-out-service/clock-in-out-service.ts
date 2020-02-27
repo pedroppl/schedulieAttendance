@@ -17,8 +17,8 @@ export class ClockInOutServiceProvider {
 
 
   public recordClockAction(id:string, action: string, action_ts:string , token:any/* there are other optionals params that MUST be included */): Observable<any> {
-    let url = "https://app.schedulie.com/api/tas/";
-
+    //let url = "";
+    let url = "removed_url"
     url = url + id + "/clock";
 
       let options = {token:''}
@@ -35,7 +35,7 @@ export class ClockInOutServiceProvider {
 
 
   public getStaffInfo(pin: string, token:any /* there are other optionals params that MUST be included */): Observable<any> {
-    let url = "https://app.schedulie.com/api/2018/assigneepin"
+    let url = "removed_url"
 
 
     let options = {pin:'', token:''}
@@ -48,7 +48,7 @@ export class ClockInOutServiceProvider {
 
 
   public getStaffClockInfo(id: string, token:any /* there are other optionals params that MUST be included */): Observable<any> {
-    let url = "https://app.schedulie.com/api/lasttas/"+id+"/";
+    let url = "removed_url/"+id+"/";
 
 
     let options = {token:''}
